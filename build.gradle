@@ -1,0 +1,66 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+ext {
+    minSdkVersion = 16
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+
+    multidex = '1.0.3'
+    timber = '4.6.0'
+    joda = '2.9.9.1'
+    leakCanaryVersion = '1.5.4'
+    crashlytics = '2.8.0@aar'
+    guava = '23.5-android'
+    butterknife = '8.8.1'
+    rxJava = '2.0.9'
+    rxAndroid = '2.0.1'
+    rxbinding = '2.0.0'
+    rxlifecycle = '2.2.1'
+    firebaseMessagingVersion = '11.8.0'
+    mobmetricalib = '2.80'
+
+    okhttp = '3.9.0'
+    retrofit = '2.2.0'
+    stomp = '1.5.0'
+
+    appCompatVersion = '27.0.2'
+    picassoVersion = '2.5.2'
+    picassoTransformations = '2.1.2'
+    materialDrawerVersion = '6.0.6@aar'
+    MPAndroidChartVersion = 'v3.0.3'
+    bottomNavigation = '2.1.0'
+    constraintLayout = '1.1.0'
+
+    junitVersion = "4.12"
+    mockitoCoreVersion = "2.7.22"
+    runnerVersion = "1.0.0"
+
+    appsflyerVersion = "4+@aar"
+    installreferrerVersion = "1.0"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
