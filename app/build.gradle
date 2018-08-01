@@ -29,6 +29,7 @@ dependencies {
 
     implementation "com.android.support:multidex:$rootProject.ext.multidex"
     implementation "com.jakewharton.timber:timber:$rootProject.ext.timber"
+    implementation "net.danlew:android.joda:$rootProject.ext.joda"
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakCanaryVersion"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakCanaryVersion"
@@ -39,9 +40,12 @@ dependencies {
     }
     //endregion Common
 
+    //region Support
+    implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:support-annotations:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    //endregion Support
 
     implementation project(":api")
 }

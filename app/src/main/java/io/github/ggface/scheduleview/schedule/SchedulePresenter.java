@@ -3,13 +3,20 @@ package io.github.ggface.scheduleview.schedule;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import io.github.ggface.api.beans.EventBean;
 import io.github.ggface.api.repositories.ScheduleRepository;
 import io.github.ggface.api.utils.PojoUtils;
+import io.github.ggface.scheduleview.schedule.adapter.EventListItem;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Презентер для экрана {@link ScheduleActivity}
@@ -37,6 +44,8 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
     public void subscribe() {
         mSubscriptionDisposable.add(mScheduleRepository.events()
                 .distinctUntilChanged()
+                .map(this::improveDays)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mView::onEventsChanged));
     }
@@ -49,7 +58,7 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
 
     @Override
     public void obtainEvents(@NonNull Date date) {
-        mView.setBalanceLoadingIndicator(false);
+        mView.setBalanceLoadingIndicator(true);
 
         cancelObtainEvents();
         mDisposable = mScheduleRepository.obtainEvents(date)
@@ -66,5 +75,35 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
             mDisposable.dispose();
             mDisposable = null;
         }
+    }
+
+    /**
+     * Модифициует данные
+     *
+     * Так как гет запрос не обрабатывает даты, а вью хочется сделать с нормальным выводом по дням,
+     * здесь числа недели преобразую в даты, где 1 это сегодня.
+     *
+     * @param sourceList список событий
+     * @return список подготовленных для вывода данных
+     */
+    @NonNull
+    private List<EventListItem> improveDays(@NonNull List<EventBean> sourceList) {
+        List<EventListItem> viewList = new ArrayList<>(sourceList.size());
+        int i = 0;
+
+        int marker = 0;
+        while (i <= sourceList.size() - 1) {
+            EventBean eventBean = sourceList.get(i++);
+            DateTime eventDate = DateTime.now().minusDays(1).plusDays(eventBean.getWeekDay());
+
+            int currentMarket = eventDate.getYear() + eventDate.getDayOfYear();
+            if (currentMarket > marker) {
+                viewList.add(EventListItem.newDate(eventDate));
+                marker = currentMarket;
+            }
+
+            viewList.add(EventListItem.newHistory(eventBean));
+        }
+        return viewList;
     }
 }

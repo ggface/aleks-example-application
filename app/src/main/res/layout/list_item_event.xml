@@ -13,11 +13,11 @@
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="#000"
         tools:text="СТРАХИ В МИРЕ ИНФОРМАЦИОННОЙ БЕЗОПАСНОСТИ"/>
 
     <TextView
         android:id="@+id/event_time_range_text_view"
+        style="@style/SecondaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"

@@ -5,9 +5,9 @@ import android.support.annotation.NonNull;
 import java.util.Date;
 import java.util.List;
 
-import io.github.ggface.api.beans.EventBean;
 import io.github.ggface.scheduleview.mvp.BasePresenter;
 import io.github.ggface.scheduleview.mvp.BaseView;
+import io.github.ggface.scheduleview.schedule.adapter.EventListItem;
 
 
 /**
@@ -22,9 +22,9 @@ public interface ScheduleContract {
         /**
          * Сообщает о смене списка событий
          *
-         * @param events список событий
+         * @param eventListItems список данных для вывода событий и дней
          */
-        void onEventsChanged(List<EventBean> events);
+        void onEventsChanged(List<EventListItem> eventListItems);
     }
 
     interface Presenter extends BasePresenter {
