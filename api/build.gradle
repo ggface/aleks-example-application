@@ -29,7 +29,7 @@ dependencies {
     //region Common
     implementation "com.android.support:multidex:$rootProject.ext.multidex"
 
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.8'
     //endregion Common
 
     //region Network

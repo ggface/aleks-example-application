@@ -15,7 +15,7 @@ import io.github.ggface.scheduleview.schedule.adapter.EventListItem;
  *
  * @author Ivan Novikov on 2018-07-31.
  */
-public interface ScheduleContract {
+interface ScheduleContract {
 
     interface View extends BaseView<Presenter> {
 

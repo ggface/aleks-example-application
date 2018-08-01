@@ -41,4 +41,14 @@ public class FormatUtils {
     public static String formatDayLong(DateTime dateTime) {
         return LONG_DAY.get().print(dateTime);
     }
+
+    /**
+     * Форматирует диапазон события по времени
+     *
+     * @param eventBean событие
+     * @return форматированная строка
+     */
+    public static String formatInstructor(@NonNull EventBean eventBean) {
+        return eventBean.getTeacher().isEmpty() ? "N/A" : eventBean.getTeacher();
+    }
 }

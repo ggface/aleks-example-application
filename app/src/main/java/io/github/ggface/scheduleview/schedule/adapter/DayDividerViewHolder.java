@@ -16,7 +16,7 @@ import io.github.ggface.scheduleview.utils.FormatUtils;
  */
 public class DayDividerViewHolder extends RecyclerView.ViewHolder implements EventBinder {
 
-    private TextView mDateTextView;
+    private final TextView mDateTextView;
 
     DayDividerViewHolder(View view) {
         super(view);

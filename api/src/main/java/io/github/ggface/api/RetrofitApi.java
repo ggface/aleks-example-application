@@ -26,11 +26,10 @@ public class RetrofitApi {
 
     private static final int REQUEST_REPEAT_DELAY = 1;
 
-    private final Gson mGson;
     private final ScheduleRemoteApi mScheduleRemoteApi;
 
     public RetrofitApi() {
-        mGson = new GsonBuilder()
+        Gson gson = new GsonBuilder()
                 .registerTypeAdapter(EventBean.class, new EventDeserializer())
                 .create();
 
@@ -46,7 +45,7 @@ public class RetrofitApi {
         mScheduleRemoteApi = new Retrofit.Builder()
                 .client(client)
                 .baseUrl(BuildConfig.API_HOST)
-                .addConverterFactory(GsonConverterFactory.create(mGson))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
                 .create(ScheduleRemoteApi.class);

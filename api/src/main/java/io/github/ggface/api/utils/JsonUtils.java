@@ -2,7 +2,6 @@ package io.github.ggface.api.utils;
 
 import com.google.gson.JsonElement;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,68 +23,12 @@ public class JsonUtils {
         return "";
     }
 
-    public static String string(JsonElement json, Object... segments) {
-        JsonElement element = segments(json, segments);
-        if (PojoUtils.isNotNull(element) && !element.isJsonNull()) {
-            return element.getAsString();
-        }
-        return "";
-    }
-
     public static int integer(JsonElement json, String path) {
         JsonElement element = path(json, path);
         if (PojoUtils.isNotNull(element) && !element.isJsonNull()) {
             return element.getAsInt();
         }
         return 0;
-    }
-
-    public static int integer(JsonElement json, Object... segments) {
-        JsonElement element = segments(json, segments);
-        if (PojoUtils.isNotNull(element) && !element.isJsonNull()) {
-            return element.getAsInt();
-        }
-        return 0;
-    }
-
-    public static long asLong(JsonElement json, String path) {
-        JsonElement element = path(json, path);
-        if (PojoUtils.isNotNull(element) && !element.isJsonNull()) {
-            return element.getAsLong();
-        }
-        return 0;
-    }
-
-    public static long asLong(JsonElement json, Object... segments) {
-        JsonElement element = segments(json, segments);
-        if (PojoUtils.isNotNull(element) && !element.isJsonNull()) {
-            return element.getAsLong();
-        }
-        return 0;
-    }
-
-    public static boolean bool(JsonElement json, String path) {
-        JsonElement element = path(json, path);
-        if (PojoUtils.isNotNull(element) && !element.isJsonNull()) {
-            return element.getAsBoolean();
-        }
-        return false;
-    }
-
-    public static boolean bool(JsonElement json, Object... segments) {
-        JsonElement element = segments(json, segments);
-        if (PojoUtils.isNotNull(element) && !element.isJsonNull()) {
-            return element.getAsBoolean();
-        }
-        return false;
-    }
-
-    public static BigDecimal bigDecimal(JsonElement json, String path) {
-        JsonElement element = path(json, path);
-        if (PojoUtils.isNotNull(element) && !element.isJsonNull()) {
-            return element.getAsBigDecimal();
-        }
-        return BigDecimal.ZERO;
     }
 
     @SuppressWarnings("unchecked")

@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
  *
  * @author Ivan Novikov on 2018-08-01.
  */
-public interface EventBinder {
+interface EventBinder {
 
     /**
      * Наполняет данными ViewHolder

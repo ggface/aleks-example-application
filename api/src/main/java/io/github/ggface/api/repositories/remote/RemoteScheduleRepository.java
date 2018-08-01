@@ -2,7 +2,7 @@ package io.github.ggface.api.repositories.remote;
 
 import android.support.annotation.NonNull;
 
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 
 import io.github.ggface.api.RetrofitApi;
@@ -34,10 +34,14 @@ public class RemoteScheduleRepository implements ScheduleRepository {
      * {@inheritDoc}
      */
     @Override
-    public Completable obtainEvents(@NonNull Date date) {
+    public Completable obtainEvents() {
         return mRetrofitApi.getScheduleApi().getEvents()
-                .retryWhen(errors -> mRetrofitApi.retryPolicy(errors))
-                .doOnSuccess(result -> mEventsProcessor.onNext(result))
+                .retryWhen(mRetrofitApi::retryPolicy)
+                .map(list -> {
+                    Collections.sort(list, (o1, o2) -> Integer.compare(o1.getWeekDay(), o2.getWeekDay()));
+                    return list;
+                })
+                .doOnSuccess(mEventsProcessor::onNext)
                 .toCompletable()
                 .observeOn(Schedulers.io())
                 .observeOn(Schedulers.io());

@@ -61,7 +61,7 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
         mView.setBalanceLoadingIndicator(true);
 
         cancelObtainEvents();
-        mDisposable = mScheduleRepository.obtainEvents(date)
+        mDisposable = mScheduleRepository.obtainEvents()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> mView.setBalanceLoadingIndicator(false),
                         t -> {
