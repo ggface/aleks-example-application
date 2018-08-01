@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "io.github.ggface.scheduleview"
-        minSdkVersion 21
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -24,8 +24,8 @@ android {
 
 dependencies {
     //region Common
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.8'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJava"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroid"
 
     implementation "com.android.support:multidex:$rootProject.ext.multidex"
     implementation "com.jakewharton.timber:timber:$rootProject.ext.timber"
@@ -41,10 +41,10 @@ dependencies {
     //endregion Common
 
     //region Support
-    implementation 'com.android.support:support-annotations:27.1.1'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
+    implementation "com.android.support:support-annotations:$rootProject.ext.appCompat"
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.appCompat"
+    implementation "com.android.support:recyclerview-v7:$rootProject.ext.appCompat"
+    implementation "com.android.support:design:$rootProject.ext.appCompat"
     //endregion Support
 
     implementation project(":api")

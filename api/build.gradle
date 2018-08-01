@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -28,8 +28,7 @@ android {
 dependencies {
     //region Common
     implementation "com.android.support:multidex:$rootProject.ext.multidex"
-
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.8'
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJava"
     //endregion Common
 
     //region Network
@@ -42,6 +41,6 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit"
     //endregion Network
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.appCompat"
     testImplementation 'junit:junit:4.12'
 }
