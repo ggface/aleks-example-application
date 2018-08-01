@@ -5,8 +5,6 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.util.Date;
-
 import io.github.ggface.api.utils.PojoUtils;
 import io.github.ggface.api.utils.StringUtils;
 
@@ -20,16 +18,16 @@ public class EventBean implements Parcelable {
     public static final Creator<EventBean> CREATOR = new ClassCreator();
 
     private final String mName;
-    private final Date mStartTime;
-    private final Date mEndTime;
+    private final String mStartTime;
+    private final String mEndTime;
     private final String mTeacher;
     private final String mPlace;
     private final String mDescription;
     private final int mWeekDay;
 
     public EventBean(@Nullable String name,
-                     @Nullable Date startTime,
-                     @Nullable Date endTime,
+                     @Nullable String startTime,
+                     @Nullable String endTime,
                      @Nullable String teacher,
                      @Nullable String place,
                      @Nullable String description,
@@ -45,8 +43,8 @@ public class EventBean implements Parcelable {
 
     protected EventBean(Parcel parcel) {
         mName = parcel.readString();
-        mStartTime = new Date(parcel.readLong());
-        mEndTime = new Date(parcel.readLong());
+        mStartTime = parcel.readString();
+        mEndTime = parcel.readString();
         mTeacher = parcel.readString();
         mPlace = parcel.readString();
         mDescription = parcel.readString();
@@ -67,16 +65,16 @@ public class EventBean implements Parcelable {
      * @return время начала
      */
     @NonNull
-    public Date getStartTime() {
-        return mStartTime;
+    public String getStartTime() {
+        return StringUtils.nonNull(mStartTime);
     }
 
     /**
      * @return время окончания
      */
     @NonNull
-    public Date getEndTime() {
-        return mEndTime;
+    public String getEndTime() {
+        return StringUtils.nonNull(mEndTime);
     }
 
     /**
@@ -135,6 +133,18 @@ public class EventBean implements Parcelable {
                 mWeekDay);
     }
 
+    @Override
+    public String toString() {
+        return "EventBean{" +
+                "mName='" + mName + '\'' +
+                ", mStartTime=" + mStartTime +
+                ", mEndTime=" + mEndTime +
+                ", mTeacher='" + mTeacher + '\'' +
+                ", mPlace='" + mPlace + '\'' +
+                ", mDescription='" + mDescription + '\'' +
+                ", mWeekDay=" + mWeekDay +
+                '}';
+    }
 
     //region Parcelable
     @Override
@@ -145,8 +155,8 @@ public class EventBean implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mName);
-        dest.writeLong(mStartTime.getTime());
-        dest.writeLong(mEndTime.getTime());
+        dest.writeString(mStartTime);
+        dest.writeString(mEndTime);
         dest.writeString(mTeacher);
         dest.writeString(mPlace);
         dest.writeString(mDescription);

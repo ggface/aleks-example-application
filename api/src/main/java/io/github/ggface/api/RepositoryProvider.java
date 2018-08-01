@@ -2,6 +2,8 @@ package io.github.ggface.api;
 
 import android.support.annotation.NonNull;
 
+import io.github.ggface.api.repositories.ScheduleRepository;
+
 /**
  * Провайдер репозиториев. Обеспечивает доступ к слою данных.
  *
@@ -10,8 +12,8 @@ import android.support.annotation.NonNull;
 public interface RepositoryProvider {
 
     /**
-     * @return API для расписания
+     * @return репозиторий расписания
      */
     @NonNull
-    ScheduleRemoteApi getScheduleApi();
+    ScheduleRepository getScheduleRepository();
 }

@@ -17,7 +17,7 @@ public interface BaseView<T> {
     /**
      * Сообщает об ошибке
      *
-     * @param code код ошибки
+     * @param message текст ошибки
      */
-    void showError(int code);
+    void showError(String message);
 }

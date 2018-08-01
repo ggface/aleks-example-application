@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  *
  * @author Ivan Novikov on 2018-07-31.
  */
-public class RetrofitApi implements RepositoryProvider {
+public class RetrofitApi {
 
     private static final int REQUEST_REPEAT_DELAY = 1;
 
@@ -52,18 +52,13 @@ public class RetrofitApi implements RepositoryProvider {
                 .create(ScheduleRemoteApi.class);
     }
 
-    //region RepositoryProvider
-
     /**
-     * {@inheritDoc}
+     * @return API для расписания
      */
     @NonNull
-    @Override
     public ScheduleRemoteApi getScheduleApi() {
         return mScheduleRemoteApi;
     }
-
-    //endregion RepositoryProvider
 
     /**
      * // TODO: 2018-07-31 JD

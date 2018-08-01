@@ -2,7 +2,6 @@ package io.github.ggface.api.utils;
 
 import android.support.annotation.Nullable;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
@@ -13,13 +12,6 @@ import java.util.Map;
  * @author Ivan Novikov on 2018-07-031.
  */
 public class PojoUtils {
-
-//    private static final ThreadLocal<DateTimeFormatter> DATE_REMOTE = new ThreadLocal<DateTimeFormatter>() {
-//        @Override
-//        protected DateTimeFormatter initialValue() {
-//            return DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-//        }
-//    };
 
     private PojoUtils() {
     }
@@ -38,63 +30,6 @@ public class PojoUtils {
     public static boolean isNotNull(Object value) {
         return !isNull(value);
     }
-
-    /**
-     * Конвертирует значение {@code byte} в {@code boolean}. Если значение не равно 0, то вернет
-     * true, иначе - false
-     *
-     * @param value значение для конвертации
-     * @return true или false
-     */
-    public static boolean toBoolean(byte value) {
-        return value != 0;
-    }
-
-    /**
-     * Конвертирует значение {@code boolean} в {@code byte}. Если true, то вернет 1, иначе - 0
-     *
-     * @param value значение для конвертации
-     * @return 1 или 0
-     */
-    public static byte toByte(boolean value) {
-        return (byte) (value ? 1 : 0);
-    }
-
-    public static String toString(@Nullable BigDecimal bigDecimal) {
-        String result = "0.0";
-        if (bigDecimal != null) {
-            result = String.valueOf(bigDecimal.doubleValue());
-        }
-        return result;
-    }
-
-    public static BigDecimal toBigDecimal(@Nullable String string) {
-        BigDecimal result = BigDecimal.ZERO;
-        if (StringUtils.isNotEmpty(string)) {
-            result = new BigDecimal(string);
-        }
-        return result;
-    }
-
-    /**
-//     * Преобразователь String в DateTime для парсинга
-//     *
-//     * @param milliseconds
-//     * @return объект даты
-//     */
-//    public static DateTime formatRemoteDate(Long milliseconds) {
-//        return new DateTime(milliseconds, DateTimeZone.getDefault());
-//    }
-//
-//    /**
-//     * Преобразователь String в DateTime для парсинга
-//     *
-//     * @param date дата в формате сервера
-//     * @return объект даты
-//     */
-//    public static DateTime formatRemoteDate(String date) {
-//        return DATE_REMOTE.get().parseDateTime(date);
-//    }
 
     /**
      * Проверяет что ссылка на объект не равна null

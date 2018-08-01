@@ -7,6 +7,7 @@ import com.crashlytics.android.Crashlytics;
 import com.squareup.leakcanary.LeakCanary;
 
 import io.fabric.sdk.android.Fabric;
+import io.github.ggface.api.RemoteFacade;
 import io.github.ggface.api.RepositoryProvider;
 import io.github.ggface.api.RetrofitApi;
 import timber.log.Timber;
@@ -39,7 +40,7 @@ public class AleksApplication extends MultiDexApplication {
                     .build());
         }
 
-        mRepositoryProvider = new RetrofitApi();
+        mRepositoryProvider = new RemoteFacade(new RetrofitApi());
     }
 
     public RepositoryProvider getRepositoryProvider() {

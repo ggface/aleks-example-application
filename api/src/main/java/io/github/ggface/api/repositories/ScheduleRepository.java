@@ -1,4 +1,4 @@
-package io.github.ggface.api;
+package io.github.ggface.api.repositories;
 
 import android.support.annotation.NonNull;
 
@@ -22,10 +22,10 @@ public interface ScheduleRepository {
      * @param date дата для выборки событий
      * @return Результат выполнения
      */
-    Completable obtainCountries(@NonNull Date date);
+    Completable obtainEvents(@NonNull Date date);
 
     /**
      * @return источник списка событий
      */
-    Flowable<List<EventBean>> countries();
+    Flowable<List<EventBean>> events();
 }
