@@ -60,7 +60,7 @@ public class RetrofitApi {
     }
 
     /**
-     * // TODO: 2018-07-31 JD
+     * Повторим запрос в случае фейла
      *
      * @param errors поставщик ошибок
      * @return поставщик

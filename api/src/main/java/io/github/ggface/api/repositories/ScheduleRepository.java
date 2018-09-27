@@ -14,11 +14,12 @@ import io.reactivex.Flowable;
 public interface ScheduleRepository {
 
     /**
-     * Запрашивает список событий
+     * Запрашивает список событий.
      *
+     * @param force если true, кеш будет проигнорирован
      * @return Результат выполнения
      */
-    Completable obtainEvents();
+    Completable obtainEvents(boolean force);
 
     /**
      * @return источник списка событий

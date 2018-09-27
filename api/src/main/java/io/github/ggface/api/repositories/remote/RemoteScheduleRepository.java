@@ -34,17 +34,24 @@ public class RemoteScheduleRepository implements ScheduleRepository {
      * {@inheritDoc}
      */
     @Override
-    public Completable obtainEvents() {
-        return mRetrofitApi.getScheduleApi().getEvents()
-                .retryWhen(mRetrofitApi::retryPolicy)
-                .map(list -> {
-                    Collections.sort(list, (o1, o2) -> Integer.compare(o1.getWeekDay(), o2.getWeekDay()));
-                    return list;
-                })
-                .doOnSuccess(mEventsProcessor::onNext)
-                .toCompletable()
-                .observeOn(Schedulers.io())
-                .observeOn(Schedulers.io());
+    public Completable obtainEvents(boolean force) {
+        Completable result;
+        List<EventBean> events = mEventsProcessor.getValue();
+        if (events == null || force) {
+            result = mRetrofitApi.getScheduleApi().getEvents()
+                    .retryWhen(mRetrofitApi::retryPolicy)
+                    .map(list -> {
+                        Collections.sort(list, (o1, o2) -> Integer.compare(o1.getWeekDay(), o2.getWeekDay()));
+                        return list;
+                    })
+                    .doOnSuccess(mEventsProcessor::onNext)
+                    .toCompletable()
+                    .observeOn(Schedulers.io())
+                    .observeOn(Schedulers.io());
+        } else {
+            return Completable.complete();
+        }
+        return result;
     }
 
     /**

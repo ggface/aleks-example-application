@@ -1,8 +1,5 @@
 package io.github.ggface.scheduleview.schedule;
 
-import android.support.annotation.NonNull;
-
-import java.util.Date;
 import java.util.List;
 
 import io.github.ggface.scheduleview.mvp.BasePresenter;
@@ -32,8 +29,8 @@ interface ScheduleContract {
         /**
          * Запрос на получение событий
          *
-         * @param date дата для выборки событий
+         * @param force если true, игнорируем кеш
          */
-        void obtainEvents(@NonNull Date date);
+        void obtainEvents(boolean force);
     }
 }

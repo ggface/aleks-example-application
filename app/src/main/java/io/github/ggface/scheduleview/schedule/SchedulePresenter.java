@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import io.github.ggface.api.beans.EventBean;
@@ -25,12 +24,11 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class SchedulePresenter implements ScheduleContract.Presenter {
 
+    @Nullable
+    private Disposable mDisposable;
     private final ScheduleContract.View mView;
     private final ScheduleRepository mScheduleRepository;
     private final CompositeDisposable mSubscriptionDisposable;
-
-    @Nullable
-    private Disposable mDisposable;
 
     SchedulePresenter(@NonNull ScheduleContract.View view,
                       @NonNull ScheduleRepository scheduleRepository) {
@@ -48,6 +46,8 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mView::onEventsChanged));
+
+        obtainEvents(false);
     }
 
     @Override
@@ -57,11 +57,11 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
     }
 
     @Override
-    public void obtainEvents(@NonNull Date date) {
+    public void obtainEvents(boolean force) {
         mView.setBalanceLoadingIndicator(true);
 
         cancelObtainEvents();
-        mDisposable = mScheduleRepository.obtainEvents()
+        mDisposable = mScheduleRepository.obtainEvents(force)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> mView.setBalanceLoadingIndicator(false),
                         t -> {

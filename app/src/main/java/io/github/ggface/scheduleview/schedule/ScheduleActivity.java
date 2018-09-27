@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import java.util.Date;
 import java.util.List;
 
 import io.github.ggface.api.RepositoryProvider;
@@ -40,10 +39,6 @@ public class ScheduleActivity extends AppCompatActivity implements ScheduleContr
         initControls();
 
         mPresenter = new SchedulePresenter(this, getRepositoryProvider().getScheduleRepository());
-
-        if (savedInstanceState == null) {
-            mPresenter.obtainEvents(new Date());
-        }
     }
 
     @Override
@@ -114,7 +109,7 @@ public class ScheduleActivity extends AppCompatActivity implements ScheduleContr
         mSwipeRefreshLayout.setColorSchemeResources(R.color.accent);
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
             mSwipeRefreshLayout.setRefreshing(false);
-            mPresenter.obtainEvents(new Date());
+            mPresenter.obtainEvents(true);
         });
 
         mEventsRecyclerView.setAdapter(mEventsAdapter);
